@@ -35,14 +35,10 @@ def insertionSort (lst, orden:str)->list:
     size =  len(lst)-1 
     pos1 = 1
     
-    for i  in range (0,50,):
-      print (lst[i])
-     
-
+    #for i  in range (0,50,):
+    #  print (lst[i])
     #input ("clic")
 
-
-    
     for index in range(1,len(lst)):
      currentvalue = int(lst[index]['vote_count'])
      position = index
@@ -55,19 +51,18 @@ def insertionSort (lst, orden:str)->list:
          #print (currentvalue)
      lst[position]=original
 
-    input ("************************* dar clic para imprimir lista ordenada  en Insertion procedure  ********************")
+    input ("Dar clic para imprimir lista ordenada  en Insertion procedure")
 
-     
-    if (orden == "a"):
+    if (orden == "less"):
+          for i  in range (0,len(lst),1):
+              print (lst[i]['vote_count'])
           print ("Se ordeno ascendentemente")
-          
-    if (orden=="d"):
-            for i  in range (0,len(lst)):
-                tempo= lst[len(lst)]
-                lst[len(lst)-i]=lst[i]
-                lst[i]=tempo
-            print ("Se ordeno descendentemente")
+          input ("Se finalizo el proceso...")
+    if (orden=="greater"):
+          input ("estoy aqui")
+          for i  in range (len(lst),0,1):
+              print (lst[i]['vote_count'])
+          print ("Se ordeno Descendentemente")
+          input ("Se finalizo el proceso...")
 
-    for i  in range (0,len(lst),1):
-          print (lst[i]['vote_count'])
     return lst

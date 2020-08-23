@@ -211,12 +211,14 @@ def orderElementsByCriteria(function, column, lst, elements):
     return 0
 
 def iSort (lst:list, orden:str)->list: 
-    
+    t1_start = process_time() #tiempo inicial
     input ("Vamos a proceder a ordenar usando el metodo Insertion Sort, esto puede tomar algunos segundos o minutos. Clic para continuar")
     listaOrdenada = []
     listaOrdenada=InsSort.insertionSort (lst, orden)
-  
-   
+    t1_stop = process_time() #tiempo final
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("Tiempo de ejecución de metodo InsertionSort ",t1_stop-t1_start," segundos")
+    input ("Dar clic para continuar...")
     return listaOrdenada
 
 def main():
@@ -293,14 +295,14 @@ def main():
                 input ("Clic para cotinuar")
 
             elif int(inputs)==4: #opcion 4
-                 orden="a"
+                 orden="less"
                  #print (lista1)
                  #input ("Clic para avanzar")
                  lista3=iSort (lista1,orden)
                  print  ("Se ha ordenado la lista")
 
             elif int(inputs)==5: #opcion 5
-                 orden="d"
+                 orden="greater"
                  #print (lista1)
                  #input ("Clic para avanzar")
                  lista3=iSort (lista1,orden)
