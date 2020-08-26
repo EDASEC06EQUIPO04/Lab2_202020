@@ -86,22 +86,25 @@ def printMenu():
     print("\n Bienvenidos a la consola del RETO 1           ***** EXPLORANDO LAMAGIA DEL CINE *****")
     print("\n**************************************************************************************")
     print ("CARGA DE DATOS")
-    print("     (1) Lab 0 - Cargar Datos de Archivos Large ")
-    print("     (2) Lab 0 - Cargar Datos de Archivos Small ")
-    print("     (3) Lab 0 - Cargar cualquier archivo por nombre")
+    print("     (1)  Lab 0 - Cargar Datos de Archivos Large ")
+    print("     (2)  Lab 0 - Cargar Datos de Archivos Small ")
+    print("     (3)  Lab 0 - Cargar cualquier archivo por nombre")
     print ("")
     print ("REQUERIMIENTO 2 - Crear Ranking de peliculas")
-    print("     (4) Lab 1 - Ordenar por Vote Count Ascendente")
-    print("     (5) Lab 1 - Ordenar por Vote Count Descendente")
-    print("     (6) Lab 1 - Ordenar por Vote Average Ascendente")
-    print("     (7) Lab 1 - Ordenar por Vote Average Descendente")
-    print("     (8) Lab 1 - The Best Movies")
-    print("     (9) Lab 1 - The Best Worst")
+    print("     (4)  Lab 2 - Ordenar por Vote Count Ascendente")
+    print("     (5)  Lab 2 - Ordenar por Vote Count Descendente")
+    print("     (6)  Lab 2 - Ordenar por Vote Average Ascendente")
+    print("     (7)  Lab 2 - Ordenar por Vote Average Descendente")
+    print("     (8)  Lab 2 - The Best Movies")
+    print("     (9)  Lab 2 - The Worst Movies")
+    print("     (10) Lab 2 - Shellsort")
+    print("     (11) Lab 2 - Quicksort")
+
     print ("")
     print ("REQUERIMIENTO 3 - Conocer un director")
-    print("     (10) Lab 1 - Listar las peliculas de un director")
-    print("     (11) Lab 1 - numero de peliculas del director")
-    print("     (12) Lab 1 - promediode la calificacion de las peliculas del director")
+    print("     (11) Lab 3 - Listar las peliculas de un director")
+    print("     (12) Lab 3 - numero de peliculas del director")
+    print("     (13) Lab 3 - promediode la calificacion de las peliculas del director")
     print ("")
     
     print("     0- Salir")
@@ -210,16 +213,33 @@ def orderElementsByCriteria(function, column, lst, elements):
     """
     return 0
 
-def iSort (lst:list, orden:str)->list: 
+def iSort (lst:list, criterio:str, orden:str)->list: 
     t1_start = process_time() #tiempo inicial
     input ("Vamos a proceder a ordenar usando el metodo Insertion Sort, esto puede tomar algunos segundos o minutos. Clic para continuar")
     listaOrdenada = []
-    listaOrdenada=InsSort.insertionSort (lst, orden)
+    listaOrdenada=InsSort.insertionSort (lst,criterio, orden)
     t1_stop = process_time() #tiempo final
     print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     print("Tiempo de ejecución de metodo InsertionSort ",t1_stop-t1_start," segundos")
     input ("Dar clic para continuar...")
     return listaOrdenada
+
+def buscarMovies (lista2:list,cantidad:int)->None:
+     
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++  The Best Movies +++++++++++++++++++++++++++++++++")
+    for i in range (0,cantidad,1):
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print(lista2[i],"\n")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    input ("Dar clic para continuar...")
+
+def buscarMoviesWorst (lista2:list,cantidad:int)->None:
+    print("+++++++++++++++++++++++++++++++++++++++++++++++++++  The Best Movies +++++++++++++++++++++++++++++++++")
+    for i in range (len(lista2)-1,len(lista2)-12-cantidad,-1):
+        print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        print(lista2[i],"\n")
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    input ("Dar clic para continuar...")
 
 def main():
     """
@@ -272,10 +292,9 @@ def main():
         if len(inputs)>0:
             if int(inputs)==1: #opcion 1
                 lista1=loadCSVFile("Data/theMoviesdb/MoviesDetailsCleaned-large.csv", lista1) 
-                print("Datos cargados de Movies Large, ",lista1['size']," elementos cargados")
-                
+                print("Datos cargados de Movies Large, ",len(lista1)," elementos cargados")
                 lista2=loadCSVFile("Data/theMoviesdb/MoviesCastingRaw-large.csv", lista2 ) 
-                print("Datos cargados de Casting Large, ",lista2['size']," elementos cargados")
+                print("Datos cargados de Casting Large, ",len(lista2)," elementos cargados")
                 input ("Clic para cotinuar...")
 
             elif int(inputs)==2: #opcion 2
@@ -290,37 +309,59 @@ def main():
                 input ("Clic para continuar")
                 fileToLoad = input ("Digite el nombre del archivo [ ejemplo: Data/GoodReads/books.csv ] : ")
                 lista1=loadCSVFile(fileToLoad) 
-                print("Datos cargados del archivo [",fileToLoad, " ]: ", lista1['size'])
+                print("Datos cargados del archivo [",fileToLoad, " ]: ", len(lista1))
                 
                 input ("Clic para cotinuar")
 
             elif int(inputs)==4: #opcion 4
                  orden="less"
+                 criterio='vote_count'
                  #print (lista1)
                  #input ("Clic para avanzar")
-                 lista3=iSort (lista1,orden)
+                 lista3=iSort (lista1,criterio, orden)
                  print  ("Se ha ordenado la lista")
 
             elif int(inputs)==5: #opcion 5
                  orden="greater"
+                 criterio='vote_count'
                  #print (lista1)
                  #input ("Clic para avanzar")
-                 lista3=iSort (lista1,orden)
+                 lista3=iSort (lista1,criterio, orden)
                  print  ("Se ha ordenado la lista")
             elif int(inputs)==6: #opcion 6
-                if lista==None or lista['size']==0: #obtener la longitud de la lista
-                    print("La lista esta vacía")
-                else:
-                    criteria =input('Ingrese el criterio de búsqueda\n')
-                    counter=countElementsByCriteria(criteria,0,lista)
-                    print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
+                 orden="less"
+                 criterio='vote_average'
+                 #print (lista1)
+                 #input ("Clic para avanzar")
+                 lista3=iSort (lista1,criterio, orden)
+                 print  ("Se ha ordenado la lista")
             elif int(inputs)==7: #opcion 7 
-                input ("En construccion....Clic para cotinuar")
+                 orden="greater"
+                 criterio='vote_average'
+                 #print (lista1)
+                 #input ("Clic para avanzar")
+                 lista3=iSort (lista1,criterio, orden)
+                 print  ("Se ha ordenado la lista")               
+                 input ("En construccion....Clic para cotinuar")
             elif int(inputs)==8: #opcion 8
-                input ("En construccion....Clic para cotinuar")
-            elif int(inputs)==9: #opcion 9
+                
+                cantidad=int(input ("Digite el numero de pelicuales que dea lisar:"))
+                buscarMovies (lista1,cantidad)
                 input ("En construccion....Clic para cotinuar")
 
+            elif int(inputs)==9: #opcion 9
+                cantidad=int(input ("Digite el numero de pelicuales que dea lisar:"))
+                buscarMoviesWorst (lista1,cantidad)
+                input ("En construccion....Clic para cotinuar")
+            elif int(inputs)==10: #opcion 10
+                input ("En construccion....Clic para cotinuar")
+            elif int(inputs)==11: #opcion 11
+                input ("En construccion....Clic para cotinuar")            
+            elif int(inputs)==12: #opcion 12
+                input ("En construccion....Clic para cotinuar")           
+            elif int(inputs)==13: #opcion 13
+                input ("En construccion....Clic para cotinuar")           
+            
             elif int(inputs)==0: #opcion 0, salir
                 sys.exit(0)  
 
